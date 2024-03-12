@@ -1,0 +1,161 @@
+using System;
+
+class Program1
+{
+    void even()
+    {
+        Console.WriteLine("The no Check is Even or Odd");
+
+        Console.WriteLine("Enter a number:");
+        int number = int.Parse(Console.ReadLine());
+
+        if (number % 2 == 0)
+        {
+            Console.WriteLine("{0} is an even number.", number);
+        }
+        else
+        {
+            Console.WriteLine("{0} is an odd number.", number);
+        }
+    }
+
+    void Average()
+    {
+        Console.WriteLine(" ");
+        Console.WriteLine("Enter 5 numbers:");
+        double sum = 0;
+
+        for (int i = 0; i < 5; i++)
+        {
+            Console.Write($"Enter number {i + 1}: ");
+           
+            if (double.TryParse(Console.ReadLine(), out double number))
+            {
+                
+                sum += number;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                i--; 
+            }
+        }
+        double average = sum / 5;
+
+        Console.WriteLine($"The average of the 5 numbers is: {average}");
+    }
+
+    void shuffled()
+    {
+       
+        Console.WriteLine(" ");
+        Console.Write("Enter a string: ");
+        string inputString = Console.ReadLine();
+
+        if (inputString.Length > 1)
+        {
+            
+            char[] charArray = inputString.ToCharArray();
+            char temp = charArray[0];
+            charArray[0] = charArray[inputString.Length - 1];
+            charArray[inputString.Length - 1] = temp;
+
+            
+            string shuffledString = new string(charArray);
+
+            Console.WriteLine("Shuffled string: " + shuffledString);
+        }
+        else
+        {
+            Console.WriteLine("String is too short to shuffle.");
+        }
+    }
+
+    void ConvertCase()
+    {
+        Console.WriteLine(" ");
+        Console.Write("Enter a string with capital letters: ");
+        string inputString = Console.ReadLine();
+
+        string lowercaseString = inputString.ToLower();
+
+        Console.WriteLine("Lowercase string: " + lowercaseString);
+    }
+
+    void Pair()
+    {
+        Console.WriteLine(" ");
+
+        Console.Write("Enter an integer: ");
+        string input = Console.ReadLine();
+
+        if (int.TryParse(input, out int number))
+        {
+            int digitSum = CalculateDigitSum(number);
+            Console.WriteLine("Sum of digits: " + digitSum);
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please enter a valid integer.");
+        }
+    }
+
+    static int CalculateDigitSum(int num)
+    {
+        int sum = 0;
+
+        while (num != 0)
+        {
+            sum += num % 10;
+            num /= 10;
+        }
+
+        return sum;
+    }
+
+    static void Main(string[] args)
+    {
+        Program1 p1 = new Program1();
+
+        Console.WriteLine("Choose an option:");
+        Console.WriteLine("1. Check if a number is even or odd");
+        Console.WriteLine("2. Calculate the average of 5 numbers");
+        Console.WriteLine("3. Shuffle the characters of a string");
+        Console.WriteLine("4. Convert a string to lowercase");
+        Console.WriteLine("5. Calculate the sum of digits in an integer");
+
+        Console.Write("Enter your choice (1-5): ");
+        int choice;
+        if (int.TryParse(Console.ReadLine(), out choice))
+        {
+            switch (choice)
+            {
+                case 1:
+                    p1.even();
+                    break;
+                case 2:
+                    p1.Average();
+                    break;
+                case 3:
+                    p1.shuffled();
+                    break;
+                case 4:
+                    p1.ConvertCase();
+                    break;
+                case 5:
+                    p1.Pair();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please choose a number between 1 and 5.");
+                    break;
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+        }
+    }
+}
+
+
+
