@@ -1,0 +1,324 @@
+using System;
+
+class Assignment
+{
+   static void CheckEvenOdd()
+    {
+        Console.WriteLine("Enter a number:");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        if (number % 2 == 0)
+            Console.WriteLine(number + " The number is even.");
+        else
+            Console.WriteLine(number + " The number is odd.");
+    }
+
+    static void PrintDivisibleBy5()
+    {
+        Console.WriteLine("Numbers divisible by 5:");
+
+        for (int i = 1; i <= 100; i++)
+        {
+            if (i % 5 == 0)
+                Console.Write(i + " ");
+        }
+        Console.WriteLine();
+    }
+
+    static void CalculateFactorial()
+    {
+        Console.WriteLine("Enter a number:");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        long factorial = 1;
+
+        for (int i = 1; i <= number; i++)
+        {
+            factorial *= i;
+        }
+
+        Console.WriteLine($"Factorial of {number} is: {factorial}");
+    }
+
+    static void PrintNumbersLessThan10()
+    {
+        int[] numbers = { 2, 5, 12, 8, 3, 15 };
+
+        Console.WriteLine("Numbers less than 10:");
+
+        foreach (int num in numbers)
+        {
+            if (num < 10)
+                Console.Write(num + " ");
+        }
+        Console.WriteLine();
+    }
+
+    static void CheckPrime()
+    {
+        Console.WriteLine("Enter a number:");
+
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        bool isPrime = true;
+
+        if (number <= 1)
+            isPrime = false;
+
+        for (int i = 2; i <= Math.Sqrt(number); i++)
+        {
+            if (number % i == 0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
+
+        if (isPrime)
+            Console.WriteLine("The number is prime.");
+        else
+            Console.WriteLine("The number is not prime.");
+    }
+
+    static void CheckPalindrome()
+    {
+        Console.WriteLine("Enter a number:");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        if (IsPalindrome(number))
+            Console.WriteLine("The number is a palindrome.");
+        else
+            Console.WriteLine("The number is not a palindrome.");
+    }
+
+    static bool IsPalindrome(int number)
+    {
+        int reversedNumber = ReverseNumber(number);
+        return number == reversedNumber;
+    }
+
+    static int ReverseNumber(int number)
+    {
+        int reversedNumber = 0;
+        while (number > 0)
+        {
+            reversedNumber = reversedNumber * 10 + number % 10;
+            number /= 10;
+        }
+        return reversedNumber;
+    }
+
+
+    static void HandleException()
+    {
+        try
+        {
+            Console.WriteLine("Enter a number:");
+            double number = Convert.ToDouble(Console.ReadLine());
+
+            if (number < 0)
+                throw new ArgumentOutOfRangeException("Number must be non-negative.");
+
+            double squareRoot = Math.Sqrt(number);
+            Console.WriteLine($"Square root of {number} is: {squareRoot}");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    static void HandleException2()
+    {
+        try
+        {
+            Console.WriteLine("Enter first number:");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Enter second number:");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            double result = num1 / num2;
+            Console.WriteLine($"Result of division: {result}");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Invalid input. Please enter numeric values.");
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Cannot divide by zero.");
+        }
+    }
+
+    static void reverse()
+    {
+        Console.WriteLine("Enter three letters:");
+        string input = Console.ReadLine();
+
+        if (input.Length == 3)
+        {
+            Console.WriteLine($"Reversed order: {input[2]}{input[1]}{input[0]}");
+        }
+        else
+        {
+            Console.WriteLine("Please enter exactly three letters.");
+        }
+    }
+
+    static void find()
+    {
+        Console.WriteLine("Enter a character:");
+        char ch = Convert.ToChar(Console.ReadLine());
+
+        if (char.IsLetter(ch))
+        {
+            ch = char.ToLower(ch);
+            if ("aeiou".Contains(ch))
+                Console.WriteLine("Vowel");
+            else
+                Console.WriteLine("Consonant");
+        }
+        else if (char.IsDigit(ch))
+        {
+            Console.WriteLine("Digit");
+        }
+        else
+        {
+            Console.WriteLine("Symbol");
+        }
+    }
+
+    static void height()
+    {
+        
+            Console.WriteLine("Enter height in centimeters:");
+            double height = Convert.ToDouble(Console.ReadLine());
+
+            if (height < 150)
+                Console.WriteLine("Short");
+            else if (height >= 150 && height <= 180)
+                Console.WriteLine("Average");
+            else
+                Console.WriteLine("Tall");
+     }
+
+    static void Student()
+    {
+        Console.WriteLine("Enter roll number:");
+        int rollNo = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter name:");
+        string name = Console.ReadLine();
+
+        double[] marks = new double[3];
+
+        for (int i = 0; i < marks.Length; i++)
+        {
+            Console.WriteLine($"Enter marks of subject {i + 1}:");
+            marks[i] = Convert.ToDouble(Console.ReadLine());
+        }
+
+        double totalMarks = CalculateTotalMarks(marks);
+        double percentage = CalculatePercentage(totalMarks);
+        string division = CalculateDivision(percentage);
+
+        Console.WriteLine($"Roll No: {rollNo}");
+        Console.WriteLine($"Name: {name}");
+        Console.WriteLine($"Total Marks: {totalMarks}");
+        Console.WriteLine($"Percentage: {percentage}%");
+        Console.WriteLine($"Division: {division}");
+    }
+    static double CalculateTotalMarks(double[] marks)
+    {
+        double total = 0;
+        foreach (double mark in marks)
+        {
+            total += mark;
+        }
+        return total;
+    }
+
+    static double CalculatePercentage(double totalMarks)
+    {
+        return (totalMarks / (3 * 100)) * 100;
+    }
+
+    static string CalculateDivision(double percentage)
+    {
+        if (percentage >= 60)
+            return "First Division";
+        else if (percentage >= 45)
+            return "Second Division";
+        else if (percentage >= 33)
+            return "Third Division";
+        else
+            return "Fail";
+    }
+    static void Main(string[] args)
+    {
+       
+        Console.WriteLine("1. Check if a number is even or odd");
+        Console.WriteLine("2. Print numbers divisible by 5");
+        Console.WriteLine("3. Calculate factorial of a number");
+        Console.WriteLine("4. Print numbers less than 10 from a list");
+        Console.WriteLine("5. Check if a number is prime");
+        Console.WriteLine("6. Check if a number is palindrome");
+        Console.WriteLine("7. To calculate square root with exception handling for negative numbers:");
+        Console.WriteLine("8. To divide two numbers with exception handling for non-numeric values ");
+        Console.WriteLine("9. To display three letters in reverse order");
+        Console.WriteLine("10. To check if a character is a vowel, digit, or symbol");
+        Console.WriteLine("11. To categorize person's height: ");
+        Console.WriteLine("12. To read roll number, name, and marks of three subjects and calculate total, percentage, and division ");
+        Console.WriteLine("Choose an option:");
+
+        int choice = Convert.ToInt32(Console.ReadLine());
+
+        switch (choice)
+        {
+            case 1:
+                CheckEvenOdd();
+                break;
+            case 2:
+                PrintDivisibleBy5();
+                break;
+            case 3:
+                CalculateFactorial();
+                break;
+            case 4:
+                PrintNumbersLessThan10();
+                break;
+            case 5:
+                CheckPrime();
+                break;
+            case 6:
+                CheckPalindrome();
+                break;
+            case 7:
+                HandleException();
+                break;
+            case 8: 
+                HandleException2();
+                break;
+            case 9:
+                reverse();
+                break;
+            case 10:
+                find();
+                break;
+            case 11:
+                height();
+                break;
+            case 12:
+                Student();
+                break;
+            default:
+                Console.WriteLine("Invalid choice!");
+                break;
+        }
+    }
+}
