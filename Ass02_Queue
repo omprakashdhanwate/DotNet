@@ -1,0 +1,42 @@
+using System;
+using System.Collections;
+
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public override string ToString()
+    {
+        return $"Name: {Name}, Age: {Age}";
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Queue queue = new Queue();
+
+        // Accepting information for three people
+        for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine($"Enter name for person {i + 1}:");
+            string name = Console.ReadLine();
+
+            Console.WriteLine($"Enter age for person {i + 1}:");
+            int age = int.Parse(Console.ReadLine());
+
+            // Creating a new Person object and adding it to the queue
+            queue.Enqueue(new Person { Name = name, Age = age });
+        }
+
+        // Printing the data of the people by dequeuing from the queue
+        Console.WriteLine("\nPeople in the queue:");
+        while (queue.Count > 0)
+        {
+            Person person = (Person)queue.Dequeue();
+            Console.WriteLine(person.ToString());
+        }
+    }
+}
